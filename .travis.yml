@@ -1,0 +1,21 @@
+sudo: false
+
+node_js:
+  - "node"
+os:
+  - linux
+
+before_install:
+  - npm -g typescript
+
+install:
+  - yarn
+  - yarn postpublish
+
+script:
+  - yarn test
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
