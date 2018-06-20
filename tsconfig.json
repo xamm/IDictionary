@@ -16,8 +16,8 @@
 	  "noUnusedLocals": true,
 	  "noUnusedParameters": true,
 	  "strictNullChecks": true,
-	  "strictFunctionTypes": true
-	  //"declaration": true
+	  "strictFunctionTypes": true,
+	  "declaration": true
 	},
 	"exclude": ["node_modules", "lib"]
   }
