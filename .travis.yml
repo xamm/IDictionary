@@ -6,6 +6,7 @@ os:
   - linux
 
 before_install:
+  - npm i -g npm
   - npm -g typescript
 
 install:
