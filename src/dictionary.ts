@@ -1,25 +1,11 @@
-interface IDictionaryItem<T> {
-  key: T;
-  value: any;
-}
+import { IDictionary } from "./IDictionary";
+import { DictionaryItem } from "./DictionaryItem";
 
-class DictionaryItem<T> implements IDictionaryItem<T> {
-  constructor(public key: T, public value: any) {}
-}
+export class Dictionary<T> implements IDictionary<T> {
+  constructor(private readonly items: DictionaryItem<T>[] = []) {}
 
-interface IDictionary<T> {
-  getItem(key: T): IDictionaryItem<T> | undefined;
-  addItem(key: T, value: any): void;
-  removeItem(key: T): void;
-  exists(key: T): boolean;
-  getIndex(key: T): number;
-}
-
-class Dictionary<T> implements IDictionary<T> {
-  private readonly items: IDictionaryItem<T>[];
-
-  constructor() {
-    this.items = [];
+  public get Items(): DictionaryItem<T>[] {
+    return this.items;
   }
 
   public getIndex(key: T): number {
@@ -56,9 +42,10 @@ class Dictionary<T> implements IDictionary<T> {
     this.items.splice(index, 1);
   }
 
-  public getItem(key: T): DictionaryItem<T> | undefined {
-    return this.items.find(item => {
+  public getItem(key: T): DictionaryItem<T> | null {
+    const item = this.items.find(item => {
       return item.key === key;
     });
+    return item == undefined ? null : item;
   }
 }

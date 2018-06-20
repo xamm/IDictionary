@@ -1,7 +1,37 @@
 {
-  "name": "idictionary",
-  "version": "1.0.0",
-  "main": "index.js",
-  "author": "xamm",
-  "license": "MIT"
+	"name": "idictionary",
+	"version": "1.0.0",
+	"main": "index.js",
+	"author": "xamm",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/jest": "^23.1.1",
+		"jest": "^23.1.0",
+		"ts-jest": "^22.4.6",
+		"typescript": "^2.9.2"
+	},
+	"jest": {
+		"globals": {
+			"ts-jest": {
+				"enableTsDiagnostics": true
+			}
+		},
+		"transform": {
+			"^.+\\.tsx?$": "ts-jest"
+		},
+		"rootDir" : "src",
+		"testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+		"moduleFileExtensions": [
+			"ts",
+			"tsx",
+			"js",
+			"jsx",
+			"json",
+			"node"
+		]
+	},
+	"scripts": {
+		"postpublish": "tsc",
+		"test": "jest"
+	}
 }
