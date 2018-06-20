@@ -1,20 +1,21 @@
-sudo: false
+language: node_js
 
 node_js:
-  - "stable"
-os:
-  - linux
+  - 'stable'
 
-before_install:
-  - npm -g typescript
+sudo: false
+
+env:
+  - workerCount=3 timeout=600000
+
+matrix:
+  fast_finish: true
 
 install:
   - yarn
-  - yarn postpublish
 
 script:
-  - yarn test
-
+    - yarn test
 cache:
   yarn: true
   directories:
