@@ -19,5 +19,5 @@
 	  "strictFunctionTypes": true
 	  //"declaration": true
 	},
-	"exclude": ["node_modules", "src/__test__"]
+	"exclude": ["node_modules", "lib"]
   }
