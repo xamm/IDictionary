@@ -7,7 +7,6 @@ os:
 
 install:
   - yarn
-  - yarn postpublish
 
 script:
   - yarn test

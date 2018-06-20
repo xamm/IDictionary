@@ -19,7 +19,7 @@
 		"transform": {
 			"^.+\\.tsx?$": "ts-jest"
 		},
-		"rootDir" : "src",
+		"rootDir": "src",
 		"testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
 		"moduleFileExtensions": [
 			"ts",
@@ -33,6 +33,6 @@
 	"scripts": {
 		"postpublish": "tsc",
 		"build": "tsc",
-		"test": "jest"
+		"test": "tsc && jest"
 	}
 }
