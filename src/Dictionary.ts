@@ -1,10 +1,10 @@
 import { IDictionary } from "./IDictionary";
-import { DictionaryItem } from "./DictionaryItem";
+import { DictionaryEntry } from "./DictionaryEntry";
 
 export class Dictionary<T> implements IDictionary<T> {
-  constructor(private readonly items: DictionaryItem<T>[] = []) {}
+  constructor(private readonly items: DictionaryEntry<T>[] = []) {}
 
-  public get Items(): DictionaryItem<T>[] {
+  public get Items(): DictionaryEntry<T>[] {
     return this.items;
   }
 
@@ -25,16 +25,23 @@ export class Dictionary<T> implements IDictionary<T> {
     return true;
   }
 
-  public addItem(key: T, value: any): void {
+  public add(key: T, value: any): void {
+    if (this.exists(key)) {
+      throw new Error("An entry with this key already exists.");
+	}
+    this.items.push(new DictionaryEntry(key, value));
+  }
+
+  public forceAdd(key: T, value: any): void {
     const index = this.getIndex(key);
     if (index === -1) {
-      this.items.push(new DictionaryItem(key, value));
+      this.items.push(new DictionaryEntry(key, value));
     } else {
-      this.items.splice(index, 1, new DictionaryItem(key, value));
+      this.items.splice(index, 1, new DictionaryEntry(key, value));
     }
   }
 
-  public removeItem(key: T): void {
+  public remove(key: T): void {
     const index = this.getIndex(key);
     if (index === -1) {
       return;
@@ -42,7 +49,7 @@ export class Dictionary<T> implements IDictionary<T> {
     this.items.splice(index, 1);
   }
 
-  public getItem(key: T): DictionaryItem<T> | null {
+  public get(key: T): DictionaryEntry<T> | null {
     const item = this.items.find(item => {
       return item.key === key;
     });
