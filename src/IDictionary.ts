@@ -1,6 +1,6 @@
-import { IDictionaryItem } from "./IDictionaryItem";
+import { IDictionaryEntry } from "./IDictionaryItem";
 export interface IDictionary<T> {
-  get(key: T): IDictionaryItem<T> | null;
+  get(key: T): IDictionaryEntry<T> | null;
   remove(key: T): void;
   exists(key: T): boolean;
   getIndex(key: T): number;
