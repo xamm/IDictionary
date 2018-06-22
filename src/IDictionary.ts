@@ -1,4 +1,4 @@
-import { IDictionaryEntry } from "./IDictionaryEntry";
+import { IDictionaryEntry } from "./IDictionaryItem";
 export interface IDictionary<T> {
   get(key: T): IDictionaryEntry<T> | null;
   remove(key: T): void;
