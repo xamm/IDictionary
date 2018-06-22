@@ -1,5 +1,5 @@
 {
-	"name": "idictionary",
+	"name": "i-list-dictionary",
 	"version": "0.0.1",
 	"main": "lib/index.js",
 	"types": "./lib/index.d.ts",
