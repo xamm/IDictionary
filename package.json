@@ -1,9 +1,16 @@
 {
 	"name": "idictionary",
-	"version": "1.0.0",
-	"main": "index.js",
+	"version": "0.0.1",
+	"main": "lib/index.js",
+	"types": "./lib/index.d.ts",
 	"author": "xamm",
 	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://www.github.com/xamm/IDictionary.git"
+	},
+	"description": "Dictionary implementation using an item list.",
+	"preferGlobal": false,
 	"devDependencies": {
 		"@types/jest": "^23.1.1",
 		"jest": "^23.1.0",
