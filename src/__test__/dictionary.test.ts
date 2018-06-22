@@ -1,5 +1,5 @@
 import { Dictionary } from "../Dictionary";
-import { DictionaryItem } from "../DictionaryItem";
+import { DictionaryEntry } from "../DictionaryEntry";
 
 test("expect items count to be zero on creation", () => {
   const dictionary = new Dictionary<string>();
@@ -11,7 +11,7 @@ test("expect to be added with new key", () => {
   const key = "test";
   expect(dictionary.Items.length).toEqual(0);
 
-  dictionary.addItem(key, "value");
+  dictionary.forceAdd(key, "value");
   expect(dictionary.Items.length).toEqual(1);
 });
 
@@ -20,8 +20,8 @@ test("expect to get added item", () => {
   const key = "test";
   expect(dictionary.Items.length).toEqual(0);
 
-  dictionary.addItem(key, "value");
-  const item: DictionaryItem<string> | null = dictionary.getItem(key);
+  dictionary.forceAdd(key, "value");
+  const item: DictionaryEntry<string> | null = dictionary.get(key);
   expect(item).toEqual({ key, value: "value" });
 });
 
@@ -30,10 +30,8 @@ test("expect to get null on wrong key", () => {
   const key = "test";
   expect(dictionary.Items.length).toEqual(0);
 
-  dictionary.addItem(key, "value");
-  const item: DictionaryItem<string> | null = dictionary.getItem(
-    "totally wrong"
-  );
+  dictionary.forceAdd(key, "value");
+  const item: DictionaryEntry<string> | null = dictionary.get("totally wrong");
   expect(item).toEqual(null);
 });
 
@@ -42,11 +40,11 @@ test("expect to be overwritten after being added with same key", () => {
   const key = "test";
   expect(dictionary.Items.length).toEqual(0);
 
-  dictionary.addItem(key, "value");
-  dictionary.addItem(key, 1);
-  dictionary.addItem(key, "value123");
-  dictionary.addItem(key, 500);
-  const item = dictionary.getItem(key);
+  dictionary.forceAdd(key, "value");
+  dictionary.forceAdd(key, 1);
+  dictionary.forceAdd(key, "value123");
+  dictionary.forceAdd(key, 500);
+  const item = dictionary.get(key);
   expect(dictionary.Items.length).toEqual(1);
   expect(item).toEqual({ key, value: 500 });
 });
@@ -58,16 +56,16 @@ test("expect get item multiple items", () => {
   const key3 = "Test4";
   expect(dictionary.Items.length).toEqual(0);
 
-  dictionary.addItem(key, "value");
-  dictionary.addItem(key2, 1);
-  dictionary.addItem(key3, "value123");
-  const item1 = dictionary.getItem(key);
-  const item2 = dictionary.getItem(key2);
-  const item3 = dictionary.getItem(key3);
+  dictionary.forceAdd(key, "value");
+  dictionary.forceAdd(key2, 1);
+  dictionary.forceAdd(key3, "value123");
+  const item1 = dictionary.get(key);
+  const item2 = dictionary.get(key2);
+  const item3 = dictionary.get(key3);
   expect(dictionary.Items.length).toEqual(3);
-  expect(item1).toEqual(new DictionaryItem<string>(key, "value"));
-  expect(item2).toEqual(new DictionaryItem<string>(key2, 1));
-  expect(item3).toEqual(new DictionaryItem<string>(key3, "value123"));
+  expect(item1).toEqual(new DictionaryEntry<string>(key, "value"));
+  expect(item2).toEqual(new DictionaryEntry<string>(key2, 1));
+  expect(item3).toEqual(new DictionaryEntry<string>(key3, "value123"));
 });
 
 test("expect get index single item", () => {
@@ -75,7 +73,7 @@ test("expect get index single item", () => {
   const key = "test";
   expect(dictionary.Items.length).toEqual(0);
 
-  dictionary.addItem(key, "value");
+  dictionary.forceAdd(key, "value");
   const index = dictionary.getIndex(key);
   expect(dictionary.Items.length).toEqual(1);
   expect(index).toBe(0);
@@ -86,7 +84,7 @@ test("expect get index missing item", () => {
   const key = "test";
   expect(dictionary.Items.length).toEqual(0);
 
-  dictionary.addItem(key, "value");
+  dictionary.forceAdd(key, "value");
   const index = dictionary.getIndex("wrong Key");
   expect(dictionary.Items.length).toEqual(1);
   expect(index).toBe(-1);
@@ -99,9 +97,9 @@ test("expect get index multiple items", () => {
   const key3 = "Test4";
   expect(dictionary.Items.length).toEqual(0);
 
-  dictionary.addItem(key, "value");
-  dictionary.addItem(key2, 1);
-  dictionary.addItem(key3, "value123");
+  dictionary.forceAdd(key, "value");
+  dictionary.forceAdd(key2, 1);
+  dictionary.forceAdd(key3, "value123");
   const index = dictionary.getIndex(key);
   const index2 = dictionary.getIndex(key2);
   const index3 = dictionary.getIndex(key3);
@@ -116,7 +114,7 @@ test("expect existing single item", () => {
   const key = "test";
   expect(dictionary.Items.length).toEqual(0);
 
-  dictionary.addItem(key, "value");
+  dictionary.forceAdd(key, "value");
   const isExisting = dictionary.exists(key);
   expect(dictionary.Items.length).toEqual(1);
   expect(isExisting).toBe(true);
@@ -127,7 +125,7 @@ test("expect missing item", () => {
   const key = "test";
   expect(dictionary.Items.length).toEqual(0);
 
-  dictionary.addItem(key, "value");
+  dictionary.forceAdd(key, "value");
   const isExisting = dictionary.exists("wrong Key");
   expect(dictionary.Items.length).toEqual(1);
   expect(isExisting).toBe(false);
@@ -140,9 +138,9 @@ test("expect multiple items existing", () => {
   const key3 = "Test4";
   expect(dictionary.Items.length).toEqual(0);
 
-  dictionary.addItem(key, "value");
-  dictionary.addItem(key2, 1);
-  dictionary.addItem(key3, "value123");
+  dictionary.forceAdd(key, "value");
+  dictionary.forceAdd(key2, 1);
+  dictionary.forceAdd(key3, "value123");
   const itemExisting = dictionary.exists(key);
   const itemExisting2 = dictionary.exists(key2);
   const itemExisting3 = dictionary.exists(key3);
@@ -159,12 +157,12 @@ test("expect multiple items existing after remove", () => {
   const key3 = "Test4";
   expect(dictionary.Items.length).toEqual(0);
 
-  dictionary.addItem(key, "value");
-  dictionary.addItem(key2, 1);
-  dictionary.addItem(key3, "value123");
+  dictionary.forceAdd(key, "value");
+  dictionary.forceAdd(key2, 1);
+  dictionary.forceAdd(key3, "value123");
   expect(dictionary.Items.length).toEqual(3);
 
-  dictionary.removeItem(key2);
+  dictionary.remove(key2);
   const itemExisting = dictionary.exists(key);
   const itemIndex = dictionary.getIndex(key);
 
@@ -192,11 +190,41 @@ test("expect item existing after remove with wrong key", () => {
   const key3 = "Test4";
   expect(dictionary.Items.length).toEqual(0);
 
-  dictionary.addItem(key, "value");
-  dictionary.addItem(key2, 1);
-  dictionary.addItem(key3, "value123");
+  dictionary.forceAdd(key, "value");
+  dictionary.forceAdd(key2, 1);
+  dictionary.forceAdd(key3, "value123");
   expect(dictionary.Items.length).toEqual(3);
 
-  dictionary.removeItem("totally wrong key");
+  dictionary.remove("totally wrong key");
   expect(dictionary.Items.length).toEqual(3);
+});
+
+test("expect add to add an item to empty items", () => {
+  const dictionary = new Dictionary<string>();
+  const key = "test";
+  expect(dictionary.Items.length).toEqual(0);
+
+  dictionary.add(key, "value");
+  expect(dictionary.Items.length).toEqual(1);
+});
+
+test("expect add to add multiple items to empty items", () => {
+  const dictionary = new Dictionary<string>();
+  const key = "test";
+  const key2 = "secondKey";
+  expect(dictionary.Items.length).toEqual(0);
+
+  dictionary.add(key, "value");
+  dictionary.add(key2, "value2");
+  expect(dictionary.Items.length).toEqual(2);
+});
+
+test("expect add to throw exception if key exists already", () => {
+  const dictionary = new Dictionary<string>();
+  const key = "test";
+  expect(dictionary.Items.length).toEqual(0);
+
+  dictionary.add(key, "value");
+  expect(() => dictionary.add(key, "value2")).toThrow("An entry with this key already exists.");
+  expect(dictionary.Items.length).toEqual(1);
 });
