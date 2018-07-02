@@ -225,6 +225,92 @@ test("expect add to throw exception if key exists already", () => {
   expect(dictionary.Items.length).toEqual(0);
 
   dictionary.add(key, "value");
-  expect(() => dictionary.add(key, "value2")).toThrow("An entry with this key already exists.");
+  expect(() => dictionary.add(key, "value2")).toThrow(
+    "An entry with this key already exists."
+  );
   expect(dictionary.Items.length).toEqual(1);
+});
+
+test("get all items no entries made", () => {
+  const dictionary = new Dictionary<string>();
+  expect(dictionary.Items.length).toEqual(0);
+});
+
+test("get all items one entry made", () => {
+  const dictionary = new Dictionary<string>();
+  expect(dictionary.Items.length).toEqual(0);
+  const key = "test";
+  expect(dictionary.Items.length).toEqual(0);
+
+  dictionary.add(key, "value");
+  expect(dictionary.Items.length).toEqual(1);
+  expect(dictionary.Items[0]).toEqual("value");
+});
+
+test("get all items multiple entries made", () => {
+  const dictionary = new Dictionary<string>();
+  expect(dictionary.Items.length).toEqual(0);
+  const key = "test";
+
+  dictionary.add(key, "value");
+  dictionary.add("key2", "value2");
+  expect(dictionary.Items.length).toEqual(2);
+  expect(dictionary.Items[0]).toEqual("value");
+  expect(dictionary.Items[1]).toEqual("value2");
+});
+
+test("get all keys no entries made", () => {
+  const dictionary = new Dictionary<string>();
+  expect(dictionary.Keys.length).toEqual(0);
+});
+
+test("get all keys one entry made", () => {
+  const dictionary = new Dictionary<string>();
+  expect(dictionary.Keys.length).toEqual(0);
+  const key = "test";
+  expect(dictionary.Keys.length).toEqual(0);
+
+  dictionary.add(key, "value");
+  expect(dictionary.Keys.length).toEqual(1);
+  expect(dictionary.Keys[0]).toEqual(key);
+});
+
+test("get all keys multiple entries made", () => {
+  const dictionary = new Dictionary<string>();
+  expect(dictionary.Keys.length).toEqual(0);
+  const key = "test";
+
+  dictionary.add(key, "value");
+  dictionary.add("key2", "value2");
+  expect(dictionary.Keys.length).toEqual(2);
+  expect(dictionary.Keys[0]).toEqual(key);
+  expect(dictionary.Keys[1]).toEqual("key2");
+});
+
+test("get all entries no entries made", () => {
+  const dictionary = new Dictionary<string>();
+  expect(dictionary.Entries.length).toEqual(0);
+});
+
+test("get all Entries one entry made", () => {
+  const dictionary = new Dictionary<string>();
+  expect(dictionary.Entries.length).toEqual(0);
+  const key = "test";
+  expect(dictionary.Entries.length).toEqual(0);
+
+  dictionary.add(key, "value");
+  expect(dictionary.Entries.length).toEqual(1);
+  expect(dictionary.Entries[0]).toEqual(dictionary.get(key));
+});
+
+test("get all keys multiple entries made", () => {
+  const dictionary = new Dictionary<string>();
+  expect(dictionary.Entries.length).toEqual(0);
+  const key = "test";
+
+  dictionary.add(key, "value");
+  dictionary.add("key2", "value2");
+  expect(dictionary.Entries.length).toEqual(2);
+  expect(dictionary.Entries[0]).toEqual(dictionary.get(key));
+  expect(dictionary.Entries[1]).toEqual(dictionary.get("key2"));
 });

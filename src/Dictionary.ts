@@ -2,21 +2,29 @@ import { IDictionary } from "./IDictionary";
 import { DictionaryEntry } from "./DictionaryEntry";
 
 export class Dictionary<T> implements IDictionary<T> {
-  constructor(private readonly items: DictionaryEntry<T>[] = []) {}
+  constructor(private readonly store: DictionaryEntry<T>[] = []) {}
 
-  public get Items(): DictionaryEntry<T>[] {
-    return this.items;
+  public get Entries(): DictionaryEntry<T>[] {
+    return this.store;
+  }
+
+  public get Keys(): T[] {
+    return this.store.map(entry => entry.key);
+  }
+
+  public get Items(): any[] {
+    return this.store.map(entry => entry.value);
   }
 
   public getIndex(key: T): number {
-    const index = this.items.findIndex(item => {
+    const index = this.store.findIndex(item => {
       return item.key === key;
     });
     return index;
   }
 
   public exists(key: T): boolean {
-    const index = this.items.findIndex(item => {
+    const index = this.store.findIndex(item => {
       return item.key === key;
     });
     if (index === -1) {
@@ -28,16 +36,16 @@ export class Dictionary<T> implements IDictionary<T> {
   public add(key: T, value: any): void {
     if (this.exists(key)) {
       throw new Error("An entry with this key already exists.");
-	}
-    this.items.push(new DictionaryEntry(key, value));
+    }
+    this.store.push(new DictionaryEntry(key, value));
   }
 
   public forceAdd(key: T, value: any): void {
     const index = this.getIndex(key);
     if (index === -1) {
-      this.items.push(new DictionaryEntry(key, value));
+      this.store.push(new DictionaryEntry(key, value));
     } else {
-      this.items.splice(index, 1, new DictionaryEntry(key, value));
+      this.store.splice(index, 1, new DictionaryEntry(key, value));
     }
   }
 
@@ -46,11 +54,11 @@ export class Dictionary<T> implements IDictionary<T> {
     if (index === -1) {
       return;
     }
-    this.items.splice(index, 1);
+    this.store.splice(index, 1);
   }
 
   public get(key: T): DictionaryEntry<T> | null {
-    const item = this.items.find(item => {
+    const item = this.store.find(item => {
       return item.key === key;
     });
     return item == undefined ? null : item;
