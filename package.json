@@ -37,6 +37,6 @@
 	"scripts": {
 		"postpublish": "tsc",
 		"build": "tsc",
-		"test": "jest"
+		"test": "jest --coverage --coverageReporters=text-lcov | coveralls"
 	}
 }
