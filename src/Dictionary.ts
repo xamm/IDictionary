@@ -1,8 +1,8 @@
+import { DictionaryEntry } from './DictionaryEntry';
 import { IDictionary } from "./IDictionary";
-import { DictionaryEntry } from "./DictionaryEntry";
 
 export class Dictionary<T> implements IDictionary<T> {
-  constructor(private readonly store: DictionaryEntry<T>[] = []) {}
+  constructor(private readonly store: DictionaryEntry<T>[] = []) { }
 
   public get Entries(): DictionaryEntry<T>[] {
     return this.store;
@@ -12,7 +12,7 @@ export class Dictionary<T> implements IDictionary<T> {
     return this.store.map(entry => entry.key);
   }
 
-  public get Items(): any[] {
+  public get Items() {
     return this.store.map(entry => entry.value);
   }
 
@@ -33,14 +33,14 @@ export class Dictionary<T> implements IDictionary<T> {
     return true;
   }
 
-  public add(key: T, value: any): void {
+  public add(key: T, value: string): void {
     if (this.exists(key)) {
       throw new Error("An entry with this key already exists.");
     }
     this.store.push(new DictionaryEntry(key, value));
   }
 
-  public forceAdd(key: T, value: any): void {
+  public forceAdd(key: T, value: string | number): void {
     const index = this.getIndex(key);
     if (index === -1) {
       this.store.push(new DictionaryEntry(key, value));
