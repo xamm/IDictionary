@@ -1,4 +1,4 @@
-export interface IDictionaryEntry<T> {
-  key: T;
+export interface IDictionaryEntry {
+  key: string;
   value: any;
 }

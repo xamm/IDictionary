@@ -1,9 +1,13 @@
 import { IDictionaryEntry } from "./IDictionaryEntry";
-export interface IDictionary<T> {
-  get(key: T): IDictionaryEntry<T> | null;
-  remove(key: T): void;
-  exists(key: T): boolean;
-  getIndex(key: T): number;
-  forceAdd(key: T, value: any): void;
-  add(key: T, value: any): void;
+
+export interface IDictionary {
+	add(key: string, value: any): void;
+	forceAdd(key: string, value: any): void;
+	tryGetValue(key: string): any | null;
+	tryGetEntry(key: string): IDictionaryEntry | null
+	clear(): void;
+	containsKey(key: string): boolean;
+	containsValue(value: string): boolean;
+	remove(key: string): boolean;
+	tryAdd(key: string, value: any): boolean;
 }

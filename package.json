@@ -9,8 +9,7 @@
 		"type": "git",
 		"url": "https://www.github.com/xamm/IDictionary.git"
 	},
-	"description": "Dictionary implementation using an item list.",
-	"preferGlobal": false,
+	"description": "Dictionary implementation inspired by the dotnet api.",
 	"devDependencies": {
 		"@types/jest": "^23.1.1",
 		"coveralls": "^3.0.2",
@@ -38,6 +37,7 @@
 	"scripts": {
 		"postpublish": "tsc",
 		"build": "tsc",
-		"test": "jest --coverage --coverageReporters=text-lcov | coveralls"
+		"test": "jest --coverage --coverageReporters=text-lcov | coveralls",
+		"test-local": "jest --coverage"
 	}
 }

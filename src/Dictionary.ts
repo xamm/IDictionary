@@ -1,66 +1,80 @@
-import { DictionaryEntry } from './DictionaryEntry';
+import { IDictionaryEntry } from "./IDictionaryEntry";
 import { IDictionary } from "./IDictionary";
+import { KeyFalsyError } from "./Errors/KeyFalsyError";
+import { KeyAlreadyExistsError } from "./Errors/KeyAlreadyExistsError";
 
-export class Dictionary<T> implements IDictionary<T> {
-  constructor(private readonly store: DictionaryEntry<T>[] = []) { }
+export class Dictionary implements IDictionary {
+	constructor(private readonly store: any = {}) { }
 
-  public get Entries(): DictionaryEntry<T>[] {
-    return this.store;
-  }
+	public get Count(): number {
+		return this.Keys.length;
+	}
 
-  public get Keys(): T[] {
-    return this.store.map(entry => entry.key);
-  }
+	public clear(): void {
+		const keys = this.Keys;
+		keys.forEach(key => delete this.store[key]);
+	}
 
-  public get Items() {
-    return this.store.map(entry => entry.value);
-  }
+	public get Entries(): IDictionaryEntry[] {
+		return this.Keys.map(key => this.store[key]) as IDictionaryEntry[];
+	}
 
-  public getIndex(key: T): number {
-    const index = this.store.findIndex(item => {
-      return item.key === key;
-    });
-    return index;
-  }
+	public get Keys(): string[] {
+		return Object.keys(this.store);
+	}
 
-  public exists(key: T): boolean {
-    const index = this.store.findIndex(item => {
-      return item.key === key;
-    });
-    if (index === -1) {
-      return false;
-    }
-    return true;
-  }
+	public get Items(): any[] {
+		return this.Keys.map(key => this.store[key].value);
+	}
 
-  public add(key: T, value: string): void {
-    if (this.exists(key)) {
-      throw new Error("An entry with this key already exists.");
-    }
-    this.store.push(new DictionaryEntry(key, value));
-  }
+	public containsKey(key: string): boolean {
+		if (!key)
+			throw new KeyFalsyError();
+		return this.store.hasOwnProperty(key);
+	}
 
-  public forceAdd(key: T, value: string | number): void {
-    const index = this.getIndex(key);
-    if (index === -1) {
-      this.store.push(new DictionaryEntry(key, value));
-    } else {
-      this.store.splice(index, 1, new DictionaryEntry(key, value));
-    }
-  }
+	public containsValue(value: any) {
+		return this.Items.some(item => item === value);
+	}
 
-  public remove(key: T): void {
-    const index = this.getIndex(key);
-    if (index === -1) {
-      return;
-    }
-    this.store.splice(index, 1);
-  }
+	public add(key: string, value: any): void {
+		if (!key)
+			throw new KeyFalsyError();
+		if (this.containsKey(key))
+			throw new KeyAlreadyExistsError();
 
-  public get(key: T): DictionaryEntry<T> | null {
-    const item = this.store.find(item => {
-      return item.key === key;
-    });
-    return item == undefined ? null : item;
-  }
+		this.store[key] = { key, value };
+	}
+
+	public tryAdd(key: string, value: any): boolean {
+		if (!key)
+			throw new KeyFalsyError();
+		if (this.containsKey(key))
+			return false;
+
+		this.add(key, value);
+		return true;
+	}
+
+	public forceAdd(key: string, value: string | number): void {
+		this.store[key] = { key, value };
+	}
+
+	public remove(key: string): boolean {
+		if (this.containsKey(key)) {
+			delete this.store[key]
+			return true;
+		}
+		return false;
+	}
+
+	public tryGetEntry(key: string): IDictionaryEntry | null {
+		const item = this.store[key];
+		return item == undefined ? null : item;
+	}
+
+	public tryGetValue(key: string): IDictionaryEntry | null {
+		const item = this.store[key] as IDictionaryEntry | undefined;
+		return item == undefined ? null : item.value;
+	}
 }
