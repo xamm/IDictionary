@@ -315,7 +315,7 @@ test("performance, add many items and get some afterwards ", () => {
 
 	// get entries
 	for (const key in keysToGet)
-		expect(dictionary.tryGetEntry(key)?.value).toEqual("value " + key.toString());
+		expect(dictionary.tryGetValue(key)).toEqual("value " + key.toString());
 
 	expect(dictionary.Items.length).toEqual(entriesToEnter);
 });
@@ -386,5 +386,5 @@ test("tryAdd does not add item if key does exist and returns false", () => {
 	expect(dictionary.tryAdd(key, "value")).toBe(true);
 	expect(dictionary.tryAdd(key, "1312")).toBe(false);
 	expect(dictionary.Items.length).toEqual(1);
-	expect(dictionary.tryGetEntry(key)?.value).toEqual("value");
+	expect(dictionary.tryGetValue(key)).toEqual("value");
 });
