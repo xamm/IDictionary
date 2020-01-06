@@ -1,6 +1,12 @@
 # vscode files
 .vscode
 
+# mac
+.DS_Store
+
+# docs
+docs
+
 # lib
 lib/
 

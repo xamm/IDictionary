@@ -1,6 +1,6 @@
-import { Dictionary } from "../Dictionary";
-import { IDictionaryEntry } from "../IDictionaryEntry";
-import { KeyFalsyError } from "../Errors/KeyFalsyError";
+import { Dictionary } from "../src/Dictionary";
+import { IDictionaryEntry } from "../src/IDictionaryEntry";
+import { KeyFalsyError } from "../src/Errors/KeyFalsyError";
 
 test("expect items count to be zero on creation", () => {
 	const dictionary = new Dictionary();
