@@ -62,9 +62,9 @@ export class Dictionary implements IDictionary {
 	}
 
 	/**
-	 * @description Returns true if key is found in the dictionary, otherwise false. Throws error if key is falsy.
-	 * @param {string} key
-	 * @returns {boolean}
+	 * @description Searches the given key in all key-value pairs. Throws error if key is falsy.
+	 * @param {string} key Key to search in all key-value pairs.
+	 * @returns {boolean} True if key is found, otherwise false.
 	 * @memberof Dictionary
 	 */
 	public containsKey(key: string): boolean {
@@ -74,9 +74,9 @@ export class Dictionary implements IDictionary {
 	}
 
 	/**
-	 * @description Returns true if value is found in the dictionary otherwise false.
-	 * @param {*} value
-	 * @returns
+	 * @description Searches the given value in all key-value pairs. 
+	 * @param {*} value Value to search in all key-value pairs.
+	 * @returns True if value is found in the dictionary, otherwise false.
 	 * @memberof Dictionary
 	 */
 	public containsValue(value: any) {
@@ -84,9 +84,9 @@ export class Dictionary implements IDictionary {
 	}
 
 	/**
-	 * @description Adds key-value pair to the dictionary. Throws error if key is false. Throws error if key is already used in the dictionary.
-	 * @param {string} key
-	 * @param {*} value
+	 * @description Adds key-value pair to the dictionary.
+	 * @param {string} key Throws error if key is false. Throws error if key is already used in the dictionary.
+	 * @param {*} value Value can be of any type.
 	 * @memberof Dictionary
 	 */
 	public add(key: string, value: any): void {
@@ -99,10 +99,10 @@ export class Dictionary implements IDictionary {
 	}
 
 	/**
-	 * @description Adds key-value pair to the dictionary. Throws error if key is false. If pair could be added returns true otherwise false.
-	 * @param {string} key
-	 * @param {*} value
-	 * @returns {boolean}
+	 * @description Adds key-value pair to the dictionary.
+	 * @param {string} key Throws error if key is false.
+	 * @param {*} value Value can be of any type.
+	 * @returns {boolean} True if pair could be added, otherwise false.
 	 * @memberof Dictionary
 	 */
 	public tryAdd(key: string, value: any): boolean {
@@ -116,9 +116,9 @@ export class Dictionary implements IDictionary {
 	}
 
 	/**
-	 * @description Adds key-value pair to the dictionary. If key already exists overwrites value.
-	 * @param {string} key
-	 * @param {*} value
+	 * @description Adds key-value pair to the dictionary. 
+	 * @param {string} key If key already exists overwrites value.
+	 * @param {*} value Value can be of any type.
 	 * @memberof Dictionary
 	 */
 	public forceAdd(key: string, value: any): void {
@@ -126,9 +126,9 @@ export class Dictionary implements IDictionary {
 	}
 
 	/**
-	 * @description Removes key-value pair from the dictionary. Throws error if key is falsy. If key is present in the dictionary returns true, otherwise false.
-	 * @param {string} key
-	 * @returns {boolean}
+	 * @description Removes key-value pair from the dictionary.
+	 * @param {string} key Throws error if key is falsy.
+	 * @returns {boolean} True if key is present in the dictionary and value is removed, otherwise false.
 	 * @memberof Dictionary
 	 */
 	public remove(key: string): boolean {
@@ -140,9 +140,9 @@ export class Dictionary implements IDictionary {
 	}
 
 	/**
-	 * @description Returns the key-value pair from the dictionary if key exists, otherwise null.
-	 * @param {string} key
-	 * @returns {(IDictionaryEntry | null)}
+	 * @description Retrieves the key-value pair from the dictionary.
+	 * @param {string} key Key to lookup key-value pair.
+	 * @returns {(IDictionaryEntry | null)} The dictionary entry if key-value pair exists, otherwise null.
 	 * @memberof Dictionary
 	 */
 	public tryGetEntry(key: string): IDictionaryEntry | null {
@@ -151,12 +151,12 @@ export class Dictionary implements IDictionary {
 	}
 
 	/**
-	 * @description Returns the value of the key-value pair from the dictionary if key exists, otherwise null.
+	 * @description Retrieves the value of the key-value pair from the dictionary.
 	 * @param {string} key
-	 * @returns {(IDictionaryEntry | null)}
+	 * @returns {(any | null)} The value of the dictionary entry if key-value pair exists, otherwise null.
 	 * @memberof Dictionary
 	 */
-	public tryGetValue(key: string): IDictionaryEntry | null {
+	public tryGetValue(key: string): any | null {
 		const item = this.store[key] as IDictionaryEntry | undefined;
 		return item == undefined ? null : item.value;
 	}
