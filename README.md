@@ -8,4 +8,4 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Documentation of this dictionary api included in the package it self and under [Documentation](https://xamm.github.io/IDictionary/).
+Documentation of this dictionary api included in repository.
