@@ -1,6 +1,8 @@
 # vscode files
 .vscode
-
+*.js
+*.js.map
+*.d.ts
 # mac
 .DS_Store
 
