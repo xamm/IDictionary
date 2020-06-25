@@ -1,0 +1,12 @@
+
+docs/
+lib/__test__/
+modern-dictionary/__test__/
+__test__/
+coverage/
+_config.yml
+.gitignore
+.travis.yml
+tsconfig.json
+src/
+package
