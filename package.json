@@ -11,12 +11,11 @@
     },
     "description": "Dictionary implementation inspired by the dotnet api.",
     "devDependencies": {
-        "@types/jest": "^23.1.1",
-        "coveralls": "^3.0.2",
-        "jest": "^23.1.0",
-        "ts-jest": "^22.4.6",
-        "typedoc": "^0.15.6",
-        "typescript": "^2.9.2"
+        "@types/jest": "^27.0.3",
+        "jest": "^27.0.0",
+        "ts-jest": "^27.1.1",
+        "typedoc": "^0.22.10",
+        "typescript": "^4.5.4"
     },
     "jest": {
         "globals": {
