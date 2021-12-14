@@ -1,6 +1,6 @@
 # IDictionary
 
-[![Build Status](https://travis-ci.org/xamm/IDictionary.svg?branch=master)](https://travis-ci.org/xamm/IDictionary)
+[![Build & Test](https://github.com/xamm/IDictionary/actions/workflows/node.js.yml/badge.svg)](https://github.com/xamm/IDictionary/actions/workflows/node.js.yml)
 
 
 [![Coverage Status](https://coveralls.io/repos/github/xamm/IDictionary/badge.svg?branch=master)](https://coveralls.io/github/xamm/IDictionary?branch=master)
