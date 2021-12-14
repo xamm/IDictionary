@@ -1,8 +1,8 @@
 {
     "name": "modern-dictionary",
     "version": "1.0.1",
-    "main": "modern-dictionary/index.js",
-    "types": "modern-dictionary/index.d.ts",
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
     "author": "xamm",
     "license": "MIT",
     "repository": {
@@ -35,14 +35,10 @@
         ]
     },
     "scripts": {
-        "move": "mkdir -p ./modern-dictionary/ && cp -r ./lib/src/* ./modern-dictionary/",
-        "postpublish": "tsc",
+        "prepublish": "npm run build",
         "build": "tsc",
+        "postpublish": "tsc",
         "test": "jest",
-        "test-local": "jest --coverage",
         "create-docs": "./node_modules/.bin/typedoc --out docs src --ignoreCompilerErrors --excludeExternals --excludeNotExported --excludePrivate --module commonjs --exclude src/index.ts --theme minimal"
-    },
-    "files": [
-        "modern-dictionary"
-    ]
+    }
 }
