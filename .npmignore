@@ -1,9 +1,10 @@
 
-docs/
-coverage/
+docs
+coverage
 _config.yml
 .gitignore
 .travis.yml
 tsconfig.json
 package
+lib
 *.tgz
