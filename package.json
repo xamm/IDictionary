@@ -1,6 +1,6 @@
 {
 	"name": "modern-dictionary",
-	"version": "0.0.5",
+	"version": "1.0.0",
 	"main": "modern-dictionary/index.js",
 	"types": "modern-dictionary/index.d.ts",
 	"author": "xamm",
